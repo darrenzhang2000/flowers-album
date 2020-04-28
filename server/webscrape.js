@@ -36,7 +36,6 @@ rp(url)
                 name: data[i].children[4].children[0].data,
             })
         }
-        console.log(flowers)
         return flowers
     })
     .catch((err) => {
