@@ -22,33 +22,13 @@ class App extends React.Component {
     render() {
         let flowers = null
         if (this.state.data) {
-            flowers = this.state.data.map((flower) => (
-                <div>
-                    <img src={flower.image} />
-                    <p>{flower.name}</p>
-                </div>
+            flowers = this.state.data.map((flower, index) => (
+                <FlowerCard image={flower.image} name={flower.name} />
             ))
-            console.log(flowers)
           }
-        console.log(flowers)
         return (
             <div className="App">
                 {flowers}
-                {/* <div className="rowC">
-                    <FlowerCard />
-                    <FlowerCard />
-                    <FlowerCard />
-                </div>
-                <div className="rowC">
-                    <FlowerCard />
-                    <FlowerCard />
-                    <FlowerCard />
-                </div>
-                <div className="rowC">
-                    <FlowerCard />
-                    <FlowerCard />
-                    <FlowerCard />
-                </div> */}
             </div>
         )
     }
