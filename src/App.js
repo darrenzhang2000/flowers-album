@@ -1,19 +1,57 @@
-import React from 'react';
-import './App.css';
-import Scratch from './Scratch';
-import FlowerCard from './components/FlowerCard'
+import React from "react"
+import "./App.css"
+import FlowerCard from "./components/FlowerCard"
+import axios from "axios"
 
-function App() {
-  return (
-    <div className="App">
-      <Scratch/>
-      <div>
-      <FlowerCard/>
-      <FlowerCard/>
-      <FlowerCard/>
-      </div>
-    </div>
-  );
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            data: null,
+            flowers: null
+        }
+    }
+    componentDidMount() {
+        axios
+            .get("http://localhost:3000/")
+            .then((response) => {
+                this.setState({ data: response.data })
+            })
+            .catch((error) => console.log(error))
+    }
+    render() {
+        let flowers = null
+        if (this.state.data) {
+            flowers = this.state.data.map((flower) => (
+                <div>
+                    <img src={flower.image} />
+                    <p>{flower.name}</p>
+                </div>
+            ))
+            console.log(flowers)
+          }
+        console.log(flowers)
+        return (
+            <div className="App">
+                {flowers}
+                {/* <div className="rowC">
+                    <FlowerCard />
+                    <FlowerCard />
+                    <FlowerCard />
+                </div>
+                <div className="rowC">
+                    <FlowerCard />
+                    <FlowerCard />
+                    <FlowerCard />
+                </div>
+                <div className="rowC">
+                    <FlowerCard />
+                    <FlowerCard />
+                    <FlowerCard />
+                </div> */}
+            </div>
+        )
+    }
 }
 
-export default App;
+export default App
